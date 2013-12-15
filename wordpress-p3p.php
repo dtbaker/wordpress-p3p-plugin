@@ -17,9 +17,9 @@ class wordpress_p3p{
             add_action('admin_menu', array($this, 'add_plugin_page'));
             add_action('admin_init', array($this, 'page_init'));
         }
-        if(get_option('p3p_header')){
+        if(get_theme_mod('p3p_header')){
             //policyref=\"http://www.example.com/w3c/p3p.xml\",
-            header("P3P: CP=\"".get_option('p3p_header')."\"");
+            header("P3P: CP=\"".get_theme_mod('p3p_header')."\"");
         }
     }
 	
@@ -65,7 +65,7 @@ class wordpress_p3p{
     }
 	
     public function save_settings($input){
-		update_option('p3p_header', isset($input['p3p_header']) ? $input['p3p_header'] : '');
+		set_theme_mod('p3p_header', isset($input['p3p_header']) ? $input['p3p_header'] : '');
     }
 	
     public function print_section_info(){
@@ -73,7 +73,7 @@ class wordpress_p3p{
     }
 	
     public function create_an_id_field(){
-        ?><input type="text" name="p3p_settings_array[p3p_header]" value="<?php echo get_option('p3p_header');?>" /><?php
+        ?><input type="text" name="p3p_settings_array[p3p_header]" value="<?php echo get_theme_mod('p3p_header');?>" /><?php
     }
 }
 
